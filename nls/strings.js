@@ -1,8 +1,7 @@
 define({
   root: ({
     _widgetLabel: "Sectores AP",
-    _featureAction_ShowSectoresAP: "Ver Sectores AP",
-    label1: "ver SectoresAP.",
+    label1: "ver Sectores AP",
     label2: "This is configurable."
   })
 });

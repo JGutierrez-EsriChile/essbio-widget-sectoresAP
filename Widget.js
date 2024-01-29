@@ -311,19 +311,6 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
         }
       })));
     },
-    clickMap: function(featureSet){
-      var that = this;
-      function awaitResolveAP(x) {return new Promise(resolve=>{setTimeout(()=>{resolve(x);},50);});}
-      async function getResolveAP() {
-        var fs = await awaitResolveAP(that.featureArray);
-        if(that.featureArray.length > 1)
-          if(document.getElementById("Sectorizar").style.display == "block"){
-            that.selectObject(that.featureArray[that.featureArray.length -1]);
-          };
-      };
-      that.featureArray.push(featureSet);
-      // getResolveAP();
-    },
     selectObject: function(featureSet){
       var subtitulo = document.getElementById("subtitulo");
       var nombreCapa = featureSet.getLayer().name;
