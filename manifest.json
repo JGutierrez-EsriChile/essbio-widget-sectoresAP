@@ -8,11 +8,8 @@
   "copyright": "",
   "license": "http://www.apache.org/licenses/LICENSE-2.0",
   "properties": {
-    "inPanel": true,
-    "hasLocale": true,
-    "hasStyle": true,
     "hasConfig": true,
-    "hasUIFile": true,
-    "supportMultiInstance": false
+    "hasStyle": true,
+    "hasLocale": false
   }
 }
