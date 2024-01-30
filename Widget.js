@@ -47,7 +47,9 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
     selChgEvt: null,
     clearFeatsEvt: null,
     baseClass: 'jimu-widget-sectores-ap',
-    sueeem: 'Seleccionar un elemento en el mapa',
+    sueeem: '',
+    FeatureServer: '',
+    layers: [],
     numeroServicios: 0,
     cantidadClientes: 0,
     metrosRedes: 0.00,
@@ -59,11 +61,17 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
     },
     startup: function() {
       this.inherited(arguments);
+      this.sueeem = this.config.sueeem
+      this.FeatureServer = this.config.FeatureServer
+      this.layers = this.config.layers
       console.log('startup');
     },
     onOpen: function(){
       console.log('onOpen');
       this.clear();
+      this.sueeem = this.config.sueeem
+      this.FeatureServer = this.config.FeatureServer
+      this.layers = this.config.layers
       this.postOpenSectoresAP();
       this.getPanel().setPosition({relativeTo: "map", top: 30, right: 5, width: 420, height:800});
     },
@@ -245,20 +253,17 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
     },
     get_Sectorizar: function(query_str){
       var that = this;
-      this.numeroServicios = 0;
-      this.cantidadClientes = 0;
-      this.metrosRedes = 0;
-      fs = "https://sigdesa.essbio.cl/server/rest/services/UtilityNetworkAP/Water_Utility_Network/FeatureServer/"
-      LY = ['501','505','510','515','520']//,'900','905','910','920']
-      // that.clearNode("zoneInfo");
-
+      that.numeroServicios = 0;
+      that.cantidadClientes = 0;
+      that.metrosRedes = 0;
+      
       var query = new Query();
       query.where = query_str;
       query.returnGeometry = true;
       query.outFields = ['*'];
       query.outSpatialReference= new SpatialReference(102100);
-      LY.forEach(ly =>{
-        var qt = new QueryTask(fs+ly);
+      that.layers.forEach(ly =>{
+        var qt = new QueryTask(that.FeatureServer + ly);
         qt.execute(query, function (response) {
           response.features.forEach(ft => {
             if (ly == '501'){
@@ -280,7 +285,7 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
     },
     eventoMapaServiciosAP: function(){
       that = this;
-      this.own(this.setFeatsEvt = on(this.map.infoWindow, "set-features", lang.hitch(this, function(){
+      that.own(this.setFeatsEvt = on(that.map.infoWindow, "set-features", lang.hitch(this, function(){
         that.clear()
         //enable navigation if more than one feature is selected
         if(this.map.infoWindow.features.length > 0){
@@ -296,7 +301,7 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
           that.clear();
         }
       })));
-      this.own(this.selChgEvt = on(this.map.infoWindow, "selection-change", lang.hitch(this, function (evt) {
+      that.own(this.selChgEvt = on(that.map.infoWindow, "selection-change", lang.hitch(this, function (evt) {
         if(evt.target.getSelectedFeature()){
           // this.map.graphics.clear();
           // this.clear();
@@ -304,10 +309,10 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
         }
       })));
 
-      this.own(this.clearFeatsEvt = on(this.map.infoWindow, "clear-features", lang.hitch(this, function (evt) {
+      that.own(this.clearFeatsEvt = on(that.map.infoWindow, "clear-features", lang.hitch(this, function (evt) {
         if(!evt.isIntermediate){
-          this.clear();
-          this.postOpenSectoresAP();
+          that.clear();
+          that.postOpenSectoresAP();
         }
       })));
     },

@@ -1,3 +1,6 @@
 {
-	"configText":"Sectorizar"
+	"configText":"Sectorización de Agua Potable",
+    "sueeem": "Seleccionar un elemento de AP en el mapa",
+	"FeatureServer" : "https://sigdesa.essbio.cl/server/rest/services/UtilityNetworkAP/Water_Utility_Network/FeatureServer/",
+	"layers" : ["501","505","510","515","520"]
 }
