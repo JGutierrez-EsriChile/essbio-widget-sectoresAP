@@ -37,8 +37,7 @@ define([
   'esri/request',
   "esri/SpatialReference",
   'jimu/dijit/Report', 
-  'jimu/dijit/PageUtils',
-  "dojo/domReady!"
+  'jimu/dijit/PageUtils'
 ],
 function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferred, all, BaseWidget,FeatureLayer,MapImageLayer,Graphic,GPMessage, Geoprocessor,SimpleMarkerSymbol,SimpleLineSymbol,SimpleFillSymbol,Color,esriRequest,SpatialReference,Report,PageUtils) {
   //To create a widget, you need to derive from BaseWidget.
