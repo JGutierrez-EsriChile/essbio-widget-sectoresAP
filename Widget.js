@@ -403,7 +403,7 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
         }
       }
     },
-    resaltarAPEnMapa(feature, RGBA, size){
+    resaltarAPEnMapa: function(feature, RGBA, size){
       if (feature){
         console.log("add feature in map:", feature)
         var L = RGBA.length;
