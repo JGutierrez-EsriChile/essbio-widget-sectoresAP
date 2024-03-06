@@ -323,7 +323,7 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
       console.log(featureSet.getLayer().id)
     
       if(identiCapa.includes('POTABLE')){
-        subtitulo.innerHTML = "<h6>"+nombreCapa+"</h6>";
+        // subtitulo.innerHTML = "<h6>"+nombreCapa+"</h6>";
 
         var assetid = featureSet.attributes["assetid"];
         var systemsubnetwork = featureSet.attributes["systemsubnetworkname"];
