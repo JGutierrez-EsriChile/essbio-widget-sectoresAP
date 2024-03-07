@@ -92,12 +92,12 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
       console.log('onSignOut');
     },
     postOpenSectoresAP: function(){
-      var that = this;
       console.log('postOpenSectoresAP');
-      extractData = that.extractData;
+      Clear = this.clear()
+      extractData = this.extractData;
       radioSelect = funcionRadioSelect;
       Sectorizar = fn_Sectorizar;
-      Clear = that.clear()
+      var that = this;
       /*- formulario para sectorizar*/
       var inlineRadio1 = document.getElementById("Radio1")
       var input1 = document.getElementById("input1")
