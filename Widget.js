@@ -95,9 +95,10 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
       console.log('postOpenSectoresAP');
       Clear = this.clear()
       extractData = this.extractData;
-      radioSelect = funcionRadioSelect;
       Sectorizar = fn_Sectorizar;
+      radioSelect = funcionRadioSelect;
       var that = this;
+
       /*- formulario para sectorizar*/
       var inlineRadio1 = document.getElementById("Radio1")
       var input1 = document.getElementById("input1")
@@ -155,11 +156,15 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
       }
       function fn_Sectorizar(){
         that.map.graphics.clear();
+
         if(inlineRadio1.checked && input1.value){
+          input1.alt = "codigo_sector_distribucion = '" + input1.value + "'";
           that.get_Sectorizar(input1.alt);
         }else if(inlineRadio2.checked && input2.value){
+          input2.alt = "codigo_sector_presion = '" + input2.value + "'";
           that.get_Sectorizar(input2.alt);
         }else if(inlineRadio3.checked && input3.value){
+          input3.alt = "codigo_cuartel = '" + input3.value + "'";
           that.get_Sectorizar(input3.alt);
         }
       }
@@ -277,6 +282,7 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
               var METROSLINEALES = ft.attributes.Shape__Length.toFixed(2);
               that.metrosRedes += parseFloat(METROSLINEALES)
             }
+            console.log("add feature in map:", ft)
             that.resaltarAPEnMapa(ft, [255,0,255], 16);
             that.resumenSectorAP();
           })
@@ -406,7 +412,6 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
     },
     resaltarAPEnMapa: function(feature, RGBA, size){
       if (feature){
-        console.log("add feature in map:", feature)
         var L = RGBA.length;
         var Sector = (L > 0) ? RGBA[0] : 0;
         var G = (L > 1) ? RGBA[1] : 128; 
