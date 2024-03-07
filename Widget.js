@@ -97,6 +97,7 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
       extractData = that.extractData;
       radioSelect = funcionRadioSelect;
       Sectorizar = fn_Sectorizar;
+      Clear = that.clear
       /*- formulario para Sectorizar*/
       var inlineRadio1 = document.getElementById("Radio1")
       var input1 = document.getElementById("input1")
