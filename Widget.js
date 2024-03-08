@@ -274,6 +274,13 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
       that.layers.forEach(ly =>{
         var qt = new QueryTask(that.FeatureServer + ly);
         qt.execute(query, function (response) {
+          //777
+          console.log("map: ",that.map)
+          console.log("response: ",response)
+          var extent = response.extent;
+          console.log("extent: ",extent)
+          that.map.setExtent(extent, true);
+          //555
           response.features.forEach(ft => {
             if (ly == '501'){
               if (ft.attributes['cantidad_cliente'] > 0){
@@ -289,8 +296,6 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
             that.resaltarAPEnMapa(ft, [255,0,255], 16);
             that.resumenSectorAP();
           })
-          var extent = response.extent;
-          that.map.setExtent(extent, true);
         });
       })
       // that.resumenSectorAP();
