@@ -95,7 +95,7 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
       console.log('postOpenSectoresAP');
       var that = this;
       extractData = this.extractData;
-      Clear = fn_Limpiar
+      Clear = fn_Limpiar;
       Sectorizar = fn_Sectorizar;
       radioSelect = funcionRadioSelect;
 
