@@ -93,11 +93,11 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
     },
     postOpenSectoresAP: function(){
       console.log('postOpenSectoresAP');
-      Clear = this.clear()
+      var that = this;
       extractData = this.extractData;
+      Clear = fn_Limpiar
       Sectorizar = fn_Sectorizar;
       radioSelect = funcionRadioSelect;
-      var that = this;
 
       /*- formulario para sectorizar*/
       var inlineRadio1 = document.getElementById("Radio1")
@@ -168,6 +168,9 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
           that.get_Sectorizar(input3.alt);
         }
       }
+      function fn_Limpiar(){
+        that.clear();
+      }
     },
     resumenSectorAP: function(){
       that = this;
@@ -216,7 +219,7 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
       var dat = tBody.insertRow(-1);
       var name = dat.insertCell(-1);
       name.style.padding = ".1rem";
-      name.innerHTML = "Número de servicios";
+      name.innerHTML = "N° medidores";
       var dosPunto = dat.insertCell(-1);
       dosPunto.style.padding = ".1rem";
       dosPunto.innerHTML = ":";
