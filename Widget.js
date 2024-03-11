@@ -176,7 +176,6 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
     resumenSectorAP: function(){
       that = this;
       that.clearNode("zoneInfo");
-      console.log('resumenSectorAP');
 
       function sector(){
         var inlineRadio1 = document.getElementById("Radio1")
@@ -278,7 +277,6 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
             
           console.log("response: ",response)
           var extent = response.features[0].geometry.getExtent()
-          console.log("extent: ",extent)
           response.features.forEach(ft => {
             if (ly == '501'){
               if (ft.attributes['cantidad_cliente'] > 0){
@@ -290,12 +288,15 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
               var METROSLINEALES = ft.attributes.Shape__Length.toFixed(2);
               that.metrosRedes += parseFloat(METROSLINEALES)
             }
-            extent = extent.union(ft.geometry.getExtent());
+            if (ft.geometry.getExtent()){
+              extent = extent.union(ft.geometry.getExtent());
+            }
             console.log("add feature in map:", ft)
             that.resaltarAPEnMapa(ft, [255,0,255], 16);
             that.resumenSectorAP();
           })
-          that.map.setExtent(extent);//(extent.expand(1.3));
+          console.log("extent: ",extent)
+          that.map.setExtent(extent);
         });
       })
       // that.resumenSectorAP();
