@@ -274,8 +274,6 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
       that.layers.forEach(ly =>{
         var qt = new QueryTask(that.FeatureServer + ly);
         qt.execute(query, function (response) {
-            
-          console.log("response: ",response)
           var extent = response.features[0].geometry.getExtent()
           response.features.forEach(ft => {
             if (ly == '501'){
