@@ -28,6 +28,7 @@ define([
   'esri/layers/FeatureLayer', 
   'esri/layers/MapImageLayer', 
   'esri/graphic',
+  'esri/graphicsUtils',
   'esri/tasks/GPMessage',
   'esri/tasks/Geoprocessor',
   'esri/symbols/SimpleMarkerSymbol',
@@ -39,7 +40,7 @@ define([
   'jimu/dijit/Report', 
   'jimu/dijit/PageUtils'
 ],
-function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferred, all, BaseWidget,FeatureLayer,MapImageLayer,Graphic,GPMessage, Geoprocessor,SimpleMarkerSymbol,SimpleLineSymbol,SimpleFillSymbol,Color,esriRequest,SpatialReference,Report,PageUtils) {
+function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferred, all, BaseWidget,FeatureLayer,MapImageLayer,Graphic,graphicsUtils,GPMessage, Geoprocessor,SimpleMarkerSymbol,SimpleLineSymbol,SimpleFillSymbol,Color,esriRequest,SpatialReference,Report,PageUtils) {
   //To create a widget, you need to derive from BaseWidget.
   return declare([BaseWidget], {
     featureArray: new Array(),
@@ -274,6 +275,9 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
       that.layers.forEach(ly =>{
         var qt = new QueryTask(that.FeatureServer + ly);
         qt.execute(query, function (response) {
+            
+          var extent = graphicsUtils.graphicsExtent(featureSet.features)
+          zoomTo(extent.expand(1.3));
           //777
           console.log("map: ",that.map)
           console.log("response: ",response)
