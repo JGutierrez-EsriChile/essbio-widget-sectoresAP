@@ -295,7 +295,7 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
             that.resaltarAPEnMapa(ft, [255,0,255], 16);
             that.resumenSectorAP();
           })
-          zoomTo(extent.expand(1.3));
+          that.map.setExtent(extent);//(extent.expand(1.3));
         });
       })
       // that.resumenSectorAP();
