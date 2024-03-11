@@ -277,14 +277,8 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
         qt.execute(query, function (response) {
             
           console.log("response: ",response)
-          var extent = graphicsUtils.graphicsExtent(response.features)
+          var extent = response.features[0].geometry.getExtent()
           console.log("extent: ",extent)
-          zoomTo(extent.expand(1.3));
-          // //777
-          // console.log("map: ",that.map)
-          // var extent = response.extent;
-          // that.map.setExtent(extent, true);
-          //555
           response.features.forEach(ft => {
             if (ly == '501'){
               if (ft.attributes['cantidad_cliente'] > 0){
@@ -296,10 +290,12 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
               var METROSLINEALES = ft.attributes.Shape__Length.toFixed(2);
               that.metrosRedes += parseFloat(METROSLINEALES)
             }
+            extent = extent.union(ft.geometry.getExtent());
             console.log("add feature in map:", ft)
             that.resaltarAPEnMapa(ft, [255,0,255], 16);
             that.resumenSectorAP();
           })
+          zoomTo(extent.expand(1.3));
         });
       })
       // that.resumenSectorAP();
