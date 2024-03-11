@@ -276,14 +276,14 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
         var qt = new QueryTask(that.FeatureServer + ly);
         qt.execute(query, function (response) {
             
-          var extent = graphicsUtils.graphicsExtent(featureSet.features)
-          zoomTo(extent.expand(1.3));
-          //777
-          console.log("map: ",that.map)
           console.log("response: ",response)
-          var extent = response.extent;
+          var extent = graphicsUtils.graphicsExtent(response.features)
           console.log("extent: ",extent)
-          that.map.setExtent(extent, true);
+          zoomTo(extent.expand(1.3));
+          // //777
+          // console.log("map: ",that.map)
+          // var extent = response.extent;
+          // that.map.setExtent(extent, true);
           //555
           response.features.forEach(ft => {
             if (ly == '501'){
