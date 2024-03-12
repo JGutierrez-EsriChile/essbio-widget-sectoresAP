@@ -282,8 +282,8 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
                 that.cantidadClientes += ft.attributes['cantidad_cliente'];
               }
             }
-            if (ly == '515' && ft.attributes.AssetGroup == 2){
-              console.log(ft.attributes.AssetGroup)
+            console.log(ft.attributes.AssetGroup)
+            if (ly == '515' && ft.attributes.AssetGroup != 2){
               var METROSLINEALES = ft.attributes.Shape__Length.toFixed(2);
               that.metrosRedes += parseFloat(METROSLINEALES)
             }
