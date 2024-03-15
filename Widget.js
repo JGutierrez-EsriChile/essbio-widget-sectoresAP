@@ -281,14 +281,14 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
               if (ft.attributes['cantidad_cliente'] >= 0){
                 that.numeroServicios++;
                 that.cantidadClientes += ft.attributes['cantidad_cliente'];
-                console.log('device: ', that.FeatureServer + ly, '\n', 'ft: ', ft)
+                // console.log('device: ', that.FeatureServer + ly, '\n', 'ft: ', ft, '\n','getlayer', ft.getLayer())
               }
             }
             if (ly == '515'){
               if(ft.attributes.assetgroup != 2){
                 var METROSLINEALES = ft.attributes.Shape__Length.toFixed(2);
                 that.metrosRedes += parseFloat(METROSLINEALES)
-                console.log('line: ', that.FeatureServer + ly, '\n', 'ft: ', ft)
+                console.log('line: ', that.FeatureServer + ly, '\n', 'ft: ', ft, '\n','getlayer', ft.getLayer())
               }
               console.log(ft.attributes.assetgroup)
             }
