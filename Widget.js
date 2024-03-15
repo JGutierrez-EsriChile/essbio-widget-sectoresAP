@@ -271,26 +271,30 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
       query.returnGeometry = true;
       query.outFields = ['*'];
       query.outSpatialReference= new SpatialReference(102100);
+
       that.layers.forEach(ly =>{
         var qt = new QueryTask(that.FeatureServer + ly);
         qt.execute(query, function (response) {
           var extent = response.features[0].geometry.getExtent()
           response.features.forEach(ft => {
             if (ly == '501'){
-              if (ft.attributes['cantidad_cliente'] > 0){
+              console.log('device: ', that.FeatureServer + ly, '\n', 'ft: ', ft)
+              if (ft.attributes['cantidad_cliente'] >= 0){
                 that.numeroServicios++;
                 that.cantidadClientes += ft.attributes['cantidad_cliente'];
               }
             }
-            console.log(ft.attributes.assetgroup)
-            if (ly == '515' && ft.attributes.assetgroup != 2){
-              var METROSLINEALES = ft.attributes.Shape__Length.toFixed(2);
-              that.metrosRedes += parseFloat(METROSLINEALES)
+            if (ly == '515'){
+              console.log('line: ', that.FeatureServer + ly, '\n', 'ft: ', ft)
+              console.log(ft.attributes.assetgroup)
+              if(ft.attributes.assetgroup != 2){
+                var METROSLINEALES = ft.attributes.Shape__Length.toFixed(2);
+                that.metrosRedes += parseFloat(METROSLINEALES)
+              }
             }
             if (ft.geometry.getExtent()){
               extent = extent.union(ft.geometry.getExtent());
             }
-            console.log("add feature in map:", ft)
             that.resaltarAPEnMapa(ft, [255,0,255], 16);
             that.resumenSectorAP();
           })
