@@ -278,19 +278,19 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
           var extent = response.features[0].geometry.getExtent()
           response.features.forEach(ft => {
             if (ly == '501'){
-              console.log('device: ', that.FeatureServer + ly, '\n', 'ft: ', ft)
               if (ft.attributes['cantidad_cliente'] >= 0){
                 that.numeroServicios++;
                 that.cantidadClientes += ft.attributes['cantidad_cliente'];
+                console.log('device: ', that.FeatureServer + ly, '\n', 'ft: ', ft)
               }
             }
             if (ly == '515'){
-              console.log('line: ', that.FeatureServer + ly, '\n', 'ft: ', ft)
-              console.log(ft.attributes.assetgroup)
               if(ft.attributes.assetgroup != 2){
                 var METROSLINEALES = ft.attributes.Shape__Length.toFixed(2);
                 that.metrosRedes += parseFloat(METROSLINEALES)
+                console.log('line: ', that.FeatureServer + ly, '\n', 'ft: ', ft)
               }
+              console.log(ft.attributes.assetgroup)
             }
             if (ft.geometry.getExtent()){
               extent = extent.union(ft.geometry.getExtent());
