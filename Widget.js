@@ -291,7 +291,8 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
                           
                 var getLayer = ft.getLayer();
                 var getTitle = ft.getTitle();
-                console.log('line: ', that.FeatureServer + ly, '\n', 'ft: ', ft, '\n','getlayer: ', getLayer,'\n','getTitle: ', getTitle)
+                var getContent = ft.getContent();
+                console.log('line: ', that.FeatureServer + ly, '\n', 'ft: ', ft, '\n','getlayer: ', getLayer,'\n','getTitle: ', getTitle,'\n','getContent: ', getContent)
               }
               console.log(ft.attributes.assetgroup)
             }
