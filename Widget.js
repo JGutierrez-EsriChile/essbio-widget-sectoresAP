@@ -288,8 +288,10 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
               if(ft.attributes.assetgroup != 2){
                 var METROSLINEALES = ft.attributes.Shape__Length.toFixed(2);
                 that.metrosRedes += parseFloat(METROSLINEALES)
-                
-                console.log('line: ', that.FeatureServer + ly, '\n', 'ft: ', ft, '\n','getlayer')
+                          
+                var getLayer = ft.getLayer();
+                var getTitle = ft.getTitle();
+                console.log('line: ', that.FeatureServer + ly, '\n', 'ft: ', ft, '\n','getlayer: ', getLayer,'\n','getTitle: ', getTitle)
               }
               console.log(ft.attributes.assetgroup)
             }
