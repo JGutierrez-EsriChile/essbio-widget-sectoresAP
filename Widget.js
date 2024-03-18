@@ -290,7 +290,8 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
                 that.metrosRedes += parseFloat(METROSLINEALES)
 
                 console.log('line: ', that.FeatureServer + ly, '\n', 'ft: ', ft)
-                console.log('line2: ','\n','getAggregationInfo: ', ft.getAggregationInfo(),'\n','getAggregationSourceLayer: ', ft.getAggregationSourceLayer(),'\n','getChildGraphics: ', ft.getChildGraphics(),'\n','getContent: ', ft.getContent(),'\n','getDojoShape: ', ft.getDojoShape(),'\n','getInfoTemplate: ', ft.getInfoTemplate(),'\n','getLayer: ', ft.getLayer(),'\n','getNode: ', ft.getNode(),'\n','getNodes: ', ft.getNodes(),'\n','getParentGraphic: ', ft.getParentGraphic(),'\n','getResolution: ', ft.getResolution(),'\n','getShape: ', ft.getShape(),'\n','getShapes: ', ft.getShapes(),'\n','getSourceLayer: ', ft.getSourceLayer(),'\n','getTitle: ', ft.getTitle())
+                // console.log('line2: ','\n','getAggregationInfo: ', ft.getAggregationInfo(),'\n','getAggregationSourceLayer: ', ft.getAggregationSourceLayer(),'\n','getChildGraphics: ', ft.getChildGraphics(),'\n','getContent: ', ft.getContent(),'\n','getDojoShape: ', ft.getDojoShape(),'\n','getInfoTemplate: ', ft.getInfoTemplate(),'\n','getLayer: ', ft.getLayer(),'\n','getNode: ', ft.getNode(),'\n','getNodes: ', ft.getNodes(),'\n','getParentGraphic: ', ft.getParentGraphic(),'\n','getResolution: ', ft.getResolution(),'\n','getShape: ', ft.getShape(),'\n','getShapes: ', ft.getShapes(),'\n','getSourceLayer: ', ft.getSourceLayer(),'\n','getTitle: ', ft.getTitle())
+                console.log('line3: ','\n','show: ', ft.show(),'\n','toJson: ', ft.toJson())
               }
               console.log(ft.attributes.assetgroup)
             }
