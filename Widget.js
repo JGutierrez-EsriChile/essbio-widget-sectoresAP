@@ -288,11 +288,9 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
               if(ft.attributes.assetgroup != 2){
                 var METROSLINEALES = ft.attributes.Shape__Length.toFixed(2);
                 that.metrosRedes += parseFloat(METROSLINEALES)
-                          
-                var getLayer = ft.getLayer();
-                var getTitle = ft.getTitle();
-                var getContent = ft.getContent();
-                console.log('line: ', that.FeatureServer + ly, '\n', 'ft: ', ft, '\n','getlayer: ', getLayer,'\n','getTitle: ', getTitle,'\n','getContent: ', getContent)
+
+                console.log('line: ', that.FeatureServer + ly, '\n', 'ft: ', ft)
+                console.log('line2: ','\n','getAggregationInfo: ', ft.getAggregationInfo(),'\n','getAggregationSourceLayer: ', ft.getAggregationSourceLayer(),'\n','getChildGraphics: ', ft.getChildGraphics(),'\n','getContent: ', ft.getContent(),'\n','getDojoShape: ', ft.getDojoShape(),'\n','getInfoTemplate: ', ft.getInfoTemplate(),'\n','getLayer: ', ft.getLayer(),'\n','getNode: ', ft.getNode(),'\n','getNodes: ', ft.getNodes(),'\n','getParentGraphic: ', ft.getParentGraphic(),'\n','getResolution: ', ft.getResolution(),'\n','getShape: ', ft.getShape(),'\n','getShapes: ', ft.getShapes(),'\n','getSourceLayer: ', ft.getSourceLayer(),'\n','getTitle: ', ft.getTitle())
               }
               console.log(ft.attributes.assetgroup)
             }
