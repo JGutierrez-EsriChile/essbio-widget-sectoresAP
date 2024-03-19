@@ -286,13 +286,12 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
                 if (ft.attributes.cantidad_cliente > 0){
                   cantidadClientes += ft.attributes.cantidad_cliente;
                   console.log('cantidad_cliente:', ft.attributes.cantidad_cliente)
-                }else{
-                  console.log(' no cliente:', ft.attributes.cantidad_cliente)
                 }
               }
               if (ly == '515' && ft.attributes.assetgroup != 2){
                 var METROSLINEALES = ft.attributes.Shape__Length.toFixed(2);
                 metrosRedes += parseFloat(METROSLINEALES)
+                console.log('metrosRedes:', metrosRedes)
                 extent = extent.union(ft.geometry.getExtent());
               }
               that.resaltarAPEnMapa(ft, [255,0,255], 16);
@@ -357,6 +356,8 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
         var codigo_sector_distribucion = featureSet.attributes["codigo_sector_distribucion"];
         var codigo_sector_presion = featureSet.attributes["codigo_sector_presion"];
         var codigo_cuartel = featureSet.attributes["codigo_cuartel"];
+        
+        console.log ("featureSet", featureSet);
         console.log ("356",assetid, codigo_sector_distribucion, codigo_sector_presion, codigo_cuartel);
         slct(assetid,codigo_sector_distribucion,codigo_sector_presion, codigo_cuartel);
 
