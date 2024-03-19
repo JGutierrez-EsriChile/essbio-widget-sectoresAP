@@ -278,19 +278,19 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
           if(response.features.length > 0){
             var extent = response.features[0].geometry.getExtent()
             response.features.forEach(ft => {
+              console.log('ly: ', ly, ' assetgroup: ', ft.attributes.assetgroup, '\n', 'ft: ', ft)
               if (ly == '501' && ft.attributes.assetgroup == 12){
+                numeroServicios++;
                 if (ft.attributes.cantidad_cliente > 0){
-                  numeroServicios++;
                   cantidadClientes += ft.attributes.cantidad_cliente;
-                  console.log('device: ', that.FeatureServer + ly, '\n', 'ft: ', ft, '\n','cantidad_cliente:', ft.attributes.cantidad_cliente)
+                  console.log('cantidad_cliente:', ft.attributes.cantidad_cliente)
                 }else{
-                  console.log('device: ', that.FeatureServer + ly, '\n',' no cliente:', ft.attributes.cantidad_cliente)
+                  console.log(' no cliente:', ft.attributes.cantidad_cliente)
                 }
               }
               if (ly == '515' && ft.attributes.assetgroup != 2){
                 var METROSLINEALES = ft.attributes.Shape__Length.toFixed(2);
                 metrosRedes += parseFloat(METROSLINEALES)
-                console.log('line: ', that.FeatureServer + ly, '\n', 'ft: ', ft, '\n', 'assetgroup: ', ft.attributes.assetgroup)
               }
               extent = extent.union(ft.geometry.getExtent());
               that.resaltarAPEnMapa(ft, [255,0,255], 16);
