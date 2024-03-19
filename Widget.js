@@ -275,33 +275,29 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
       that.layers.forEach(ly =>{
         var qt = new QueryTask(that.FeatureServer + ly);
         qt.execute(query, function (response) {
-          var extent = response.features[0].geometry.getExtent()
-          response.features.forEach(ft => {
-            if (ly == '501'){
-              if (ft.attributes['cantidad_cliente'] >= 0){
-                that.numeroServicios++;
-                that.cantidadClientes += ft.attributes['cantidad_cliente'];
-                // console.log('device: ', that.FeatureServer + ly, '\n', 'ft: ', ft, '\n','getlayer', ft.getLayer())
+          if(response.features.length > 0){
+            var extent = response.features[0].geometry.getExtent()
+            response.features.forEach(ft => {
+              if (ly == '501'){
+                if (ft.attributes.cantidad_cliente >= 0){
+                  that.numeroServicios++;
+                  that.cantidadClientes += ft.attributes.cantidad_cliente;
+                  console.log('device: ', that.FeatureServer + ly, '\n', 'ft: ', ft, '\n','cantidad_cliente:', ft.attributes.cantidad_cliente)
+                }else{
+                  console.log('device: ', that.FeatureServer + ly, '\n',' no cliente:', ft.attributes.cantidad_cliente)
+                }
               }
-            }
-            if (ly == '515'){
-              if(ft.attributes.assetgroup != 2){
+              if (ly == '515' && ft.attributes.assetgroup != 2){
                 var METROSLINEALES = ft.attributes.Shape__Length.toFixed(2);
                 that.metrosRedes += parseFloat(METROSLINEALES)
-
-                console.log('line: ', that.FeatureServer + ly, '\n', 'ft: ', ft)
-                // console.log('line2: ','\n','getAggregationInfo: ', ft.getAggregationInfo(),'\n','getAggregationSourceLayer: ', ft.getAggregationSourceLayer(),'\n','getChildGraphics: ', ft.getChildGraphics(),'\n','getContent: ', ft.getContent(),'\n','getDojoShape: ', ft.getDojoShape(),'\n','getInfoTemplate: ', ft.getInfoTemplate(),'\n','getLayer: ', ft.getLayer(),'\n','getNode: ', ft.getNode(),'\n','getNodes: ', ft.getNodes(),'\n','getParentGraphic: ', ft.getParentGraphic(),'\n','getResolution: ', ft.getResolution(),'\n','getShape: ', ft.getShape(),'\n','getShapes: ', ft.getShapes(),'\n','getSourceLayer: ', ft.getSourceLayer(),'\n','getTitle: ', ft.getTitle())
-                console.log('line3: ','\n','show: ', ft.show(),'\n','toJson: ', ft.toJson())
+                console.log('line: ', that.FeatureServer + ly, '\n', 'ft: ', ft, '\n', 'assetgroup: ', ft.attributes.assetgroup)
               }
-              console.log(ft.attributes.assetgroup)
-            }
-            if (ft.geometry.getExtent()){
               extent = extent.union(ft.geometry.getExtent());
-            }
-            that.resaltarAPEnMapa(ft, [255,0,255], 16);
-            that.resumenSectorAP();
-          })
-          that.map.setExtent(extent);
+              that.resaltarAPEnMapa(ft, [255,0,255], 16);
+              that.resumenSectorAP();
+            })
+            that.map.setExtent(extent);
+          }
         });
       })
       // that.resumenSectorAP();
