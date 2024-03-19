@@ -347,11 +347,13 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
         var systemsubnetwork = featureSet.attributes["systemsubnetworkname"];
         var pressuresubnetwork = featureSet.attributes["pressuresubnetworkname"];
         var isolationsubnetwork = featureSet.attributes["isolationsubnetworkname"];
+        console.log ("350",assetid, systemsubnetwork,pressuresubnetwork, isolationsubnetwork);
         slct_UTILITY(assetid, systemsubnetwork,pressuresubnetwork, isolationsubnetwork);
         
         var codigo_sector_distribucion = featureSet.attributes["codigo_sector_distribucion"];
         var codigo_sector_presion = featureSet.attributes["codigo_sector_presion"];
         var codigo_cuartel = featureSet.attributes["codigo_cuartel"];
+        console.log ("356",assetid, codigo_sector_distribucion, codigo_sector_presion, codigo_cuartel);
         slct(assetid,codigo_sector_distribucion,codigo_sector_presion, codigo_cuartel);
 
         document.getElementById("zoneInfo").innerHTML = "";
