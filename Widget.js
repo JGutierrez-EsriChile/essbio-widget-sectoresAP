@@ -296,8 +296,8 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
                 extent = extent.union(ft.geometry.getExtent());
               }
               that.resaltarAPEnMapa(ft, [255,0,255], 16);
-              that.resumenSectorAP(numeroServicios, cantidadClientes, metrosRedes);
             })
+            that.resumenSectorAP(numeroServicios, cantidadClientes, metrosRedes);
             if (ly == '515'){
               that.map.setExtent(extent);
             }
