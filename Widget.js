@@ -308,6 +308,7 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
       that = this;
       that.own(this.setFeatsEvt = on(that.map.infoWindow, "set-features", lang.hitch(this, function(){
         that.clear()
+        console.log("initial")
         //enable navigation if more than one feature is selected
         if(this.map.infoWindow.features.length > 0){
           /*- formulario para direcciones*/;
