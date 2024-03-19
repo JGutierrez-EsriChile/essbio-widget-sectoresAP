@@ -173,7 +173,7 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
         that.clear();
       }
     },
-    resumenSectorAP: function(){
+    resumenSectorAP: function(numeroServicios, cantidadClientes, metrosRedes){
       that = this;
       that.clearNode("zoneInfo");
 
@@ -225,7 +225,7 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
       dosPunto.innerHTML = ":";
       var value = dat.insertCell(-1);
       value.style.padding = ".1rem";
-      value.innerHTML =  this.numeroServicios;
+      value.innerHTML =  numeroServicios;
       var end = dat.insertCell(-1);
       end.style.padding = ".1rem";
       end.innerHTML =  "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
@@ -240,7 +240,7 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
       dosPunto.innerHTML = ":";
       var value = dat.insertCell(-1);
       value.style.padding = ".1rem";
-      value.innerHTML =  this.cantidadClientes;
+      value.innerHTML =  cantidadClientes;
       var end = dat.insertCell(-1);
       end.style.padding = ".1rem";
       end.innerHTML =  "&nbsp;";
@@ -249,22 +249,22 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
       var dat = tBody.insertRow(-1);
       var name = dat.insertCell(-1);
       name.style.padding = ".1rem";
-      name.innerHTML = "Metros de Red";
+      name.innerHTML = "Largo de Red (mts)";
       var dosPunto = dat.insertCell(-1);
       dosPunto.style.padding = ".1rem";
       dosPunto.innerHTML = ":";
       var value = dat.insertCell(-1);
       value.style.padding = ".1rem";
-      value.innerHTML =  this.metrosRedes.toFixed(2);
+      value.innerHTML =  metrosRedes.toFixed(2);
       var end = dat.insertCell(-1);
       end.style.padding = ".1rem";
       end.innerHTML =  "&nbsp;";
     },
     get_Sectorizar: function(query_str){
       var that = this;
-      that.numeroServicios = 0;
-      that.cantidadClientes = 0;
-      that.metrosRedes = 0;
+      var numeroServicios = 0;
+      var cantidadClientes = 0;
+      var metrosRedes = 0;
       
       var query = new Query();
       query.where = query_str;
@@ -278,10 +278,10 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
           if(response.features.length > 0){
             var extent = response.features[0].geometry.getExtent()
             response.features.forEach(ft => {
-              if (ly == '501'){
-                if (ft.attributes.cantidad_cliente >= 0){
-                  that.numeroServicios++;
-                  that.cantidadClientes += ft.attributes.cantidad_cliente;
+              if (ly == '501' && ft.attributes.assetgroup == 12){
+                if (ft.attributes.cantidad_cliente > 0){
+                  numeroServicios++;
+                  cantidadClientes += ft.attributes.cantidad_cliente;
                   console.log('device: ', that.FeatureServer + ly, '\n', 'ft: ', ft, '\n','cantidad_cliente:', ft.attributes.cantidad_cliente)
                 }else{
                   console.log('device: ', that.FeatureServer + ly, '\n',' no cliente:', ft.attributes.cantidad_cliente)
@@ -289,18 +289,17 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
               }
               if (ly == '515' && ft.attributes.assetgroup != 2){
                 var METROSLINEALES = ft.attributes.Shape__Length.toFixed(2);
-                that.metrosRedes += parseFloat(METROSLINEALES)
+                metrosRedes += parseFloat(METROSLINEALES)
                 console.log('line: ', that.FeatureServer + ly, '\n', 'ft: ', ft, '\n', 'assetgroup: ', ft.attributes.assetgroup)
               }
               extent = extent.union(ft.geometry.getExtent());
               that.resaltarAPEnMapa(ft, [255,0,255], 16);
-              that.resumenSectorAP();
+              that.resumenSectorAP(numeroServicios, cantidadClientes, metrosRedes);
             })
             that.map.setExtent(extent);
           }
         });
       })
-      // that.resumenSectorAP();
     },
     eventoMapaServiciosAP: function(){
       that = this;
