@@ -310,7 +310,7 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
         that.clear()
 
         //enable navigation if more than one feature is selected
-        if(this.map.infoWindow.features.length > 0){
+        if(this.map.infoWindow.features != null && this.map.infoWindow.features.length > 0){
           /*- formulario para direcciones*/;
           this.map.infoWindow.features.forEach(feature => {
             var layerID = feature.getLayer().id;
