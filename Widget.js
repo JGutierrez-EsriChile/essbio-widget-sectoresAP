@@ -342,7 +342,7 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
       var subtitulo = document.getElementById("subtitulo");
       var nombreCapa = featureSet.getLayer().name;
       var identiCapa = featureSet.getLayer().id;
-      console.log(featureSet.getLayer().id)
+      console.log(identiCapa)
     
       if(identiCapa.includes('POTABLE')){
         // subtitulo.innerHTML = "<h6>"+nombreCapa+"</h6>";
@@ -357,9 +357,8 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
         var codigo_sector_presion = featureSet.attributes["codigo_sector_presion"];
         var codigo_cuartel = featureSet.attributes["codigo_cuartel"];
         
-        if (codigo_sector_distribucion != null && codigo_sector_presion != null && codigo_cuartel != null){
-          slct(assetid, codigo_sector_distribucion, codigo_sector_presion, codigo_cuartel);
-        }
+        // if (codigo_sector_distribucion != null && codigo_sector_presion != null && codigo_cuartel != null){}
+        slct(assetid, codigo_sector_distribucion, codigo_sector_presion, codigo_cuartel);
 
         console.log ("featureSet", featureSet);
         console.log ("slct_1",assetid, systemsubnetwork,pressuresubnetwork, isolationsubnetwork);
@@ -411,12 +410,18 @@ function(declare, Query, QueryTask, domConstruct, array, lang, query, on, Deferr
         var input2 = document.getElementById("input2");
         var input3 = document.getElementById("input3");
 
-        input1.value = codigo_sector_distribucion;
-        input1.alt = "codigo_sector_distribucion = '" + codigo_sector_distribucion + "'";
-        input2.value = codigo_sector_presion;
-        input2.alt = "codigo_sector_presion = '" + codigo_sector_presion + "'";
-        input3.value = codigo_cuartel;
-        input3.alt = "codigo_cuartel = '" + codigo_cuartel + "'";
+        if (codigo_sector_distribucion != null){
+          input1.value = codigo_sector_distribucion;
+          input1.alt = "codigo_sector_distribucion = '" + codigo_sector_distribucion + "'";
+        }
+        if (codigo_sector_presion != null){
+          input2.value = codigo_sector_presion;
+          input2.alt = "codigo_sector_presion = '" + codigo_sector_presion + "'";
+        }
+        if (codigo_cuartel != null){
+          input3.value = codigo_cuartel;
+          input3.alt = "codigo_cuartel = '" + codigo_cuartel + "'";
+        }
 
         var btnMostrarSector = document.getElementById("btnMostrarSector");
 
